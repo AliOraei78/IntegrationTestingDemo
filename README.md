@@ -9,7 +9,7 @@ A professional sample project demonstrating Integration Testing in .NET.
 * Test Containers with real database instances
 * Best practices for writing test code
 
-## Project Structure
+## Day 1 Project Structure
 
 * **IntegrationTestingDemo**: Main Web API project
 * **IntegrationTestingDemo.Tests**: Test project
@@ -19,3 +19,9 @@ A professional sample project demonstrating Integration Testing in .NET.
 ```bash
 dotnet run --project IntegrationTestingDemo
 ```
+
+## Day 2 Progress
+
+* Configured `WebApplicationFactory` for API integration testing
+* Fixed Minimal API issue in `Program.cs`
+* Successfully tested `WeatherForecast` controller
