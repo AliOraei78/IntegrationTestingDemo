@@ -1,7 +1,14 @@
+using IntegrationTestingDemo.Data;
+using IntegrationTestingDemo.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseInMemoryDatabase("IntegrationTestDb"));
 
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();

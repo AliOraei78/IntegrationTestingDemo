@@ -25,3 +25,8 @@ dotnet run --project IntegrationTestingDemo
 * Configured `WebApplicationFactory` for API integration testing
 * Fixed Minimal API issue in `Program.cs`
 * Successfully tested `WeatherForecast` controller
+
+## Day 3 Added Technologies
+
+* Entity Framework Core InMemory
+* Repository Pattern
