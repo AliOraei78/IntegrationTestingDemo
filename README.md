@@ -30,3 +30,7 @@ dotnet run --project IntegrationTestingDemo
 
 * Entity Framework Core InMemory
 * Repository Pattern
+
+## Day 4
+
+* Integration Testing with TestContainers + real PostgreSQL

@@ -1,47 +1,44 @@
 ﻿using IntegrationTestingDemo.Data;
 using IntegrationTestingDemo.Models;
 using IntegrationTestingDemo.Repositories;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace IntegrationTestingDemo.Tests.IntegrationTests;
 
-// 1. Switching fixture to Testcontainers and adding IAsyncLifetime for test stability
-public class ProductRepositoryIntegrationTests : IClassFixture<TestContainersWebApplicationFactory>, IAsyncLifetime
+public class ProductRepositoryWithTestContainersTests : IClassFixture<TestContainersWebApplicationFactory>, IAsyncLifetime
 {
     private readonly TestContainersWebApplicationFactory _factory;
 
-    public ProductRepositoryIntegrationTests(TestContainersWebApplicationFactory factory)
+    public ProductRepositoryWithTestContainersTests(TestContainersWebApplicationFactory factory)
     {
         _factory = factory;
     }
 
-    // 2. Container initialization before tests execution
     public async Task InitializeAsync()
     {
         await _factory.InitializeAsync();
 
-        // Create database schema inside the container
         using var scope = _factory.Services.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
         await dbContext.Database.EnsureCreatedAsync();
     }
 
     public Task DisposeAsync() => Task.CompletedTask;
 
     [Fact]
-    public async Task AddAndGetAll_Products_ShouldWorkCorrectly()
+    public async Task AddAndRetrieve_Product_ShouldPersistInRealDatabase()
     {
         // Arrange
-        using var scope = _factory.Services.CreateScope();
+        var scope = _factory.Services.CreateScope();
         var repository = scope.ServiceProvider.GetRequiredService<IProductRepository>();
 
         var product = new Product
         {
-            Name = "Laptop Test",
-            Price = 15000000,
-            Stock = 10
+            Name = "Test Container Laptop",
+            Price = 25000000,
+            Stock = 5
         };
 
         // Act
@@ -50,9 +47,6 @@ public class ProductRepositoryIntegrationTests : IClassFixture<TestContainersWeb
 
         // Assert
         Assert.NotNull(products);
-
-        // Note: If previous tests have run, there may be more than one product,
-        // so Contains is safer than Single
-        Assert.Contains(products, p => p.Name == "Laptop Test");
+        Assert.Contains(products, p => p.Name == "Test Container Laptop");
     }
 }

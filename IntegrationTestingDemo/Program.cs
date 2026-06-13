@@ -6,7 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseInMemoryDatabase("IntegrationTestDb"));
+{
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+        ?? "Host=localhost;Database=testdb;Username=postgres;Password=postgres";
+    options.UseNpgsql(connectionString);
+});
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddControllers();
