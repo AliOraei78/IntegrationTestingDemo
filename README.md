@@ -34,3 +34,7 @@ dotnet run --project IntegrationTestingDemo
 ## Day 4
 
 * Integration Testing with TestContainers + real PostgreSQL
+
+## Day 5
+
+* Business layer testing using mocking for external dependencies (HttpClient + Email)
