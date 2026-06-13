@@ -1,0 +1,6 @@
+@IntegrationTestingDemo_HostAddress = http://localhost:5296
+
+GET {{IntegrationTestingDemo_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
