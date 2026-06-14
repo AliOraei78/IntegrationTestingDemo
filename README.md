@@ -38,3 +38,11 @@ dotnet run --project IntegrationTestingDemo
 ## Day 5
 
 * Business layer testing using mocking for external dependencies (HttpClient + Email)
+
+## Day 6: Testing Authentication (JWT + Identity), Authorization, and Pagination
+
+## Added Features
+
+* JWT Bearer Authentication
+* ASP.NET Core Identity
+* Protected Endpoints with Pagination
