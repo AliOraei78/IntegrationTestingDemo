@@ -16,6 +16,13 @@ public class ProtectedApiIntegrationTests : IClassFixture<CustomWebApplicationFa
         _factory = factory;
     }
 
+    public async Task InitializeAsync()
+    {
+        await _factory.InitializeDbAsync();
+    }
+
+    public Task DisposeAsync() => Task.CompletedTask;
+
     [Fact]
     public async Task Protected_Endpoint_WithValidJwt_ShouldReturnSuccess()
     {
